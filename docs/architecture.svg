@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="220" viewBox="0 0 1200 220">
+  <style>
+    .box{fill:#f6f8fa;stroke:#d0d7de;stroke-width:2;rx:14;ry:14}
+    .t{font:600 21px Arial,sans-serif;fill:#24292f}
+    .s{font:15px Arial,sans-serif;fill:#57606a}
+    .a{font:700 28px Arial,sans-serif;fill:#0969da}
+  </style>
+  <rect class="box" x="10" y="55" width="190" height="110"/>
+  <text class="t" x="105" y="95" text-anchor="middle">App Store Connect</text>
+  <text class="s" x="105" y="125" text-anchor="middle">Analytics API</text>
+  <text class="a" x="215" y="120">→</text>
+  <rect class="box" x="250" y="55" width="190" height="110"/>
+  <text class="t" x="345" y="95" text-anchor="middle">JWT / ES256</text>
+  <text class="s" x="345" y="125" text-anchor="middle">Secure auth</text>
+  <text class="a" x="455" y="120">→</text>
+  <rect class="box" x="490" y="55" width="190" height="110"/>
+  <text class="t" x="585" y="95" text-anchor="middle">Report Retrieval</text>
+  <text class="s" x="585" y="125" text-anchor="middle">CSV / TSV / GZIP</text>
+  <text class="a" x="695" y="120">→</text>
+  <rect class="box" x="730" y="55" width="190" height="110"/>
+  <text class="t" x="825" y="95" text-anchor="middle">Python ETL</text>
+  <text class="s" x="825" y="125" text-anchor="middle">pandas transform</text>
+  <text class="a" x="935" y="120">→</text>
+  <rect class="box" x="970" y="55" width="140" height="110"/>
+  <text class="t" x="1040" y="95" text-anchor="middle">Dataset</text>
+  <text class="s" x="1040" y="125" text-anchor="middle">BI-ready</text>
+  <text class="a" x="1120" y="120">→</text>
+  <rect class="box" x="1150" y="55" width="40" height="110"/>
+  <text class="t" x="1170" y="102" text-anchor="middle">BI</text>
+</svg>
