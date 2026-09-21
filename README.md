@@ -1,49 +1,107 @@
 # App Store Connect Analytics Pipeline
 
-A portfolio-ready Python pipeline that extracts selected analytics metrics from the Apple App Store Connect API and transforms them into a clean monthly reporting dataset for BI tools such as Power BI.
+**Python analytics pipeline for App Store Connect using JWT authentication, REST APIs, pandas, and BI-ready transformations.**
 
-## What this demonstrates
+**Skills:** Python • App Store Connect API • REST APIs • JWT / ES256 • pandas • ETL • Data Transformation • Power BI • Automation
 
-- App Store Connect API authentication with JWT / ES256
-- Automated analytics report retrieval
-- Gzip/CSV/TSV handling
-- Data cleaning and aggregation with pandas
-- Idempotent reporting-pipeline design
-- Secure configuration through environment variables
+## Business Problem
+
+App performance data in App Store Connect is accessed through API-based analytics reports that require authentication, report retrieval, compressed-file handling, and transformation before the data is suitable for business reporting.
+
+This project automates that process and converts selected app analytics metrics into a standardized monthly dataset for BI consumption.
 
 ## Architecture
 
+![App Store Connect Analytics Pipeline Architecture](docs/architecture.svg)
+
 ```text
-App Store Connect API
-        ↓
-Python extraction + transformation
-        ↓
-Monthly analytics dataset
-        ↓
-Reporting storage / REST API / CSV / database
-        ↓
-Power BI or another BI tool
+App Store Connect API → JWT Authentication → Report Retrieval → Python ETL → BI Dataset → Power BI
 ```
 
-## Metrics in the demo
+## Key Features
 
-- Impressions
-- First-time downloads
+- JWT authentication using ES256
+- Automated analytics report retrieval
+- App Store Connect REST API integration
+- GZIP, CSV, and TSV report handling
+- pandas-based data cleaning and aggregation
+- Environment-based configuration
+- BI-ready dataset preparation
 
-The code is intentionally generic and contains no production credentials, client names, application IDs, or private infrastructure details.
+## Key Engineering Decisions
 
-## Setup
+### Secure API authentication
 
-1. Create a virtual environment.
-2. Install dependencies:
+The pipeline uses short-lived JWT tokens signed with ES256 for authenticated access to App Store Connect.
+
+Private keys and identifiers are loaded from environment variables and local configuration rather than embedded in source code.
+
+### Compressed report processing
+
+App Store Connect analytics reports may be delivered as compressed downloads. The pipeline detects GZIP content, decompresses it in memory, identifies the delimiter, and loads the result into pandas.
+
+### Reusable metric extraction
+
+Metric rules are defined separately from the retrieval logic so additional KPIs can be introduced without rewriting the full pipeline.
+
+### Reporting-oriented transformation
+
+Raw platform reports are converted into a consistent analytical structure that can be stored in CSV, a database, a REST-backed store, or another reporting layer before being consumed by Power BI.
+
+## Sample Output
+
+| Month | App | Metric | Value |
+|---|---|---|---:|
+| 2026-01 | Demo App A | Impressions | 84,200 |
+| 2026-01 | Demo App A | First-time Downloads | 5,230 |
+| 2026-02 | Demo App A | Impressions | 91,450 |
+| 2026-02 | Demo App A | First-time Downloads | 6,120 |
+| 2026-02 | Demo App B | First-time Downloads | 2,880 |
+
+*Example values are illustrative only.*
+
+## What This Project Demonstrates
+
+- Building authenticated API-based analytics pipelines
+- Working with JWT and ES256
+- Integrating with REST APIs
+- Processing compressed analytics reports
+- Transforming raw platform data with pandas
+- Designing reusable metric extraction rules
+- Preparing datasets for Power BI and recurring reporting
+- Keeping sensitive configuration outside source code
+
+## Project Structure
+
+```text
+app-store-connect-analytics-pipeline/
+├── appstore_pipeline.py
+├── analytics_requests.example.json
+├── requirements.txt
+├── .env.example
+├── .gitignore
+├── docs/
+│   └── architecture.svg
+└── README.md
+```
+
+## Getting Started
+
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Copy `.env.example` to your own private configuration source and set the required environment variables.
-4. Copy `analytics_requests.example.json` to `analytics_requests.json` and add your own App Store Connect analytics report request IDs.
-5. Run:
+Configure the required environment variables using `.env.example` as a reference.
+
+Create your own local `analytics_requests.json` from:
+
+```text
+analytics_requests.example.json
+```
+
+Then run:
 
 ```bash
 python appstore_pipeline.py
@@ -51,8 +109,16 @@ python appstore_pipeline.py
 
 ## Security
 
-Never commit Apple `.p8` private keys, passwords, API credentials, real report request IDs, or `.env` files.
+Do not commit:
 
-## Portfolio note
+- Apple `.p8` private keys
+- API credentials
+- Real analytics request IDs
+- Passwords
+- Production endpoints
+- `.env` files
+- Organization-specific identifiers
+
+## Portfolio Note
 
 This repository is a sanitized demonstration of a production analytics pattern. All organization-specific names, identifiers, credentials, and endpoints have been removed.
