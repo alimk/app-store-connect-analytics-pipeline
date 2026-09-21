@@ -1,0 +1,7 @@
+.env
+*.p8
+analytics_requests.json
+__pycache__/
+*.pyc
+.venv/
+venv/
